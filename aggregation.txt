@@ -1,0 +1,461 @@
+Assignment No.:
+Title:Aggregation and indexing with suitable example using MongoDB.
+Batch:
+Roll No.:
+comp-sl-09@compsl09-OptiPlex-3020:~$ mongo
+MongoDB shell version: 2.4.11
+connecting to: test
+1.create database db
+> use db
+switched to db db
+-----------------------------------------------------------------
+2.create collection em
+> db.createCollection("em")
+{ "ok" : 1 }
+-----------------------------------------------------------------	
+3.insert documents in collection 'em'
+
+> db.employee.insert({'emp_id':'A123','name':'varsha','Status':'A','salary':25000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({'emp_id':'A123','name':'Anu','Status':'B','salary':30000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({'emp_id':'A123','name':'Hemlata','Status':'P','salary':40000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({'emp_id':'A100','name':'Radhika','Status':'A','salary':50000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({'emp_id':'A100','name':'Poonam','Status':'A','salary':45000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({'emp_id':'A100','name':'Charu','Status':'P','salary':60000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({'emp_id':'A102','name':'Sneha','Status':'B','salary':55000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({'emp_id':'A102','name':'Mayuri','Status':'A','salary':20000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({'emp_id':'A102','name':'Prajkta','Status':'P','salary':35000})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({'emp_id':'A102','name':'Nikita','Status':'B','salary':70000})
+WriteResult({ "nInserted" : 1 })
+
+-----------------------------------------------------------------PP
+4.Display all documents inserted in collection em.
+> db.employee.find().pretty()
+{
+	"_id" : ObjectId("560b8e9838776103d63d3266"),
+	"emp_id" : "A123",
+	"name" : "varsha",
+	"Status" : "A",
+	"salary" : 25000
+}
+{
+	"_id" : ObjectId("560b8eee38776103d63d3267"),
+	"emp_id" : "A123",
+	"name" : "Anu",
+	"Status" : "B",
+	"salary" : 30000
+}
+{
+	"_id" : ObjectId("560b8efa38776103d63d3268"),
+	"emp_id" : "A123",
+	"name" : "Hemlata",
+	"Status" : "P",
+	"salary" : 40000
+}
+{
+	"_id" : ObjectId("560b8f0538776103d63d3269"),
+	"emp_id" : "A100",
+	"name" : "Radhika",
+	"Status" : "A",
+	"salary" : 50000
+}
+{
+	"_id" : ObjectId("560b8f1438776103d63d326a"),
+	"emp_id" : "A100",
+	"name" : "Poonam",
+	"Status" : "A",
+	"salary" : 45000
+}
+{
+	"_id" : ObjectId("560b8f2a38776103d63d326b"),
+	"emp_id" : "A100",
+	"name" : "Charu",
+	"Status" : "P",
+	"salary" : 60000
+}
+{
+	"_id" : ObjectId("560b8f3438776103d63d326c"),
+	"emp_id" : "A102",
+	"name" : "Sneha",
+	"Status" : "B",
+	"salary" : 55000
+}
+{
+	"_id" : ObjectId("560b8f3f38776103d63d326d"),
+	"emp_id" : "A102",
+	"name" : "Mayuri",
+	"Status" : "A",
+	"salary" : 20000
+}
+{
+	"_id" : ObjectId("560b8f4838776103d63d326e"),
+	"emp_id" : "A102",
+	"name" : "Prajkta",
+	"Status" : "P",
+	"salary" : 35000
+}
+{
+	"_id" : ObjectId("560b904d38776103d63d326f"),
+	"emp_id" : "A102",
+	"name" : "Nikita",
+	"Status" : "B",
+	"salary" : 70000
+}
+> 
+
+-----------------------------------------------------------------
+ 5.Find em whoes status is A.
+> db.employee.find().pretty()
+{
+	"_id" : ObjectId("560b8e9838776103d63d3266"),
+	"emp_id" : "A123",
+	"name" : "varsha",
+	"Status" : "A",
+	"salary" : 25000
+}
+{
+	"_id" : ObjectId("560b8eee38776103d63d3267"),
+	"emp_id" : "A123",
+	"name" : "Anu",
+	"Status" : "B",
+	"salary" : 30000
+}
+{
+	"_id" : ObjectId("560b8efa38776103d63d3268"),
+	"emp_id" : "A123",
+	"name" : "Hemlata",
+	"Status" : "P",
+	"salary" : 40000
+}
+{
+	"_id" : ObjectId("560b8f0538776103d63d3269"),
+	"emp_id" : "A100",
+	"name" : "Radhika",
+	"Status" : "A",
+	"salary" : 50000
+}
+{
+	"_id" : ObjectId("560b8f1438776103d63d326a"),
+	"emp_id" : "A100",
+	"name" : "Poonam",
+	"Status" : "A",
+	"salary" : 45000
+}
+{
+	"_id" : ObjectId("560b8f2a38776103d63d326b"),
+	"emp_id" : "A100",
+	"name" : "Charu",
+	"Status" : "P",
+	"salary" : 60000
+}
+{
+	"_id" : ObjectId("560b8f3438776103d63d326c"),
+	"emp_id" : "A102",
+	"name" : "Sneha",
+	"Status" : "B",
+	"salary" : 55000
+}
+{
+	"_id" : ObjectId("560b8f3f38776103d63d326d"),
+	"emp_id" : "A102",
+	"name" : "Mayuri",
+	"Status" : "A",
+	"salary" : 20000
+}
+{
+	"_id" : ObjectId("560b8f4838776103d63d326e"),
+	"emp_id" : "A102",
+	"name" : "Prajkta",
+	"Status" : "P",
+	"salary" : 35000
+}
+{
+	"_id" : ObjectId("560b904d38776103d63d326f"),
+	"emp_id" : "A102",
+	"name" : "Nikita",
+	"Status" : "B",
+	"salary" : 70000
+}
+> db.employee.find({'Status':'A'}).pretty()
+{
+	"_id" : ObjectId("560b8e9838776103d63d3266"),
+	"emp_id" : "A123",
+	"name" : "varsha",
+	"Status" : "A",
+	"salary" : 25000
+}
+{
+	"_id" : ObjectId("560b8f0538776103d63d3269"),
+	"emp_id" : "A100",
+	"name" : "Radhika",
+	"Status" : "A",
+	"salary" : 50000
+}
+{
+	"_id" : ObjectId("560b8f1438776103d63d326a"),
+	"emp_id" : "A100",
+	"name" : "Poonam",
+	"Status" : "A",
+	"salary" : 45000
+}
+{
+	"_id" : ObjectId("560b8f3f38776103d63d326d"),
+	"emp_id" : "A102",
+	"name" : "Mayuri",
+	"Status" : "A",
+	"salary" : 20000
+}
+> 
+
+----------------------------------------------------------------- 
+6.Find em whose status is A and salary is greater than 25000
+> db.employee.find({salary:{$gt:25000},Status:"A"})
+{ "_id" : ObjectId("560b8f0538776103d63d3269"), "emp_id" : "A100", "name" : "Radhika", "Status" : "A", "salary" : 50000 }
+{ "_id" : ObjectId("560b8f1438776103d63d326a"), "emp_id" : "A100", "name" : "Poonam", "Status" : "A", "salary" : 45000 }
+------------------------------------------------------------------
+7.Find sum of amount under status A.
+
+db.employee.aggregate([{$match:{Status:"A"}},{$group:{_id:"$Status",total:{$sum:"$salary"}}}])
+{ "_id" : "A", "total" : 140000 }
+----------------------------------------------------------------
+8.Find minimum of amount under status A.
+>db.employee.aggregate([{$match:{Status:"A"}},{$group:{_id:"$Status",total:{$min:"$salary"}}}])
+{ "_id" : "A", "total" : 20000 }
+
+-----------------------------------------------------------------
+9.Find maximum of amount under status A.
+> db.employee.aggregate([{$match:{Status:"A"}},{$group:{_id:"$Status",total:{$max:"$salary"}}}])
+{ "_id" : "A", "total" : 50000 }
+
+-----------------------------------------------------------------
+10.Find first of amount under status A.
+
+> db.employee.aggregate([{$match:{Status:"A"}},{$group:{_id:"$Status",total:{$first:"$salary"}}}])
+{ "_id" : "A", "total" : 25000 }
+
+
+-----------------------------------------------------------------
+11.Find last amount under status A.
+
+ > db.employee.aggregate([{$match:{Status:"A"}},{$group:{_id:"$Status",total:{$avg:"$salary"}}}])
+{ "_id" : "A", "total" : 35000 }
+-----------------------------------------------------------------
+12.Find average amount under status A.
+> db.employee.aggregate([{$match:{Status:"A"}},{$group:{_id:"$Status",total:{$avg:"$salary"}}}])
+{ "_id" : "A", "total" : 35000 }
+
+-----------------------------------------------------------------
+
+13.Sort em according to em id in ascending order
+
+>  db.employee.aggregate([{$sort:{emp_id:1}}])
+{ "_id" : ObjectId("560b8f0538776103d63d3269"), "emp_id" : "A100", "name" : "Radhika", "Status" : "A", "salary" : 50000 }
+{ "_id" : ObjectId("560b8f1438776103d63d326a"), "emp_id" : "A100", "name" : "Poonam", "Status" : "A", "salary" : 45000 }
+{ "_id" : ObjectId("560b8f2a38776103d63d326b"), "emp_id" : "A100", "name" : "Charu", "Status" : "P", "salary" : 60000 }
+{ "_id" : ObjectId("560b8f3438776103d63d326c"), "emp_id" : "A102", "name" : "Sneha", "Status" : "B", "salary" : 55000 }
+{ "_id" : ObjectId("560b8f3f38776103d63d326d"), "emp_id" : "A102", "name" : "Mayuri", "Status" : "A", "salary" : 20000 }
+{ "_id" : ObjectId("560b8f4838776103d63d326e"), "emp_id" : "A102", "name" : "Prajkta", "Status" : "P", "salary" : 35000 }
+{ "_id" : ObjectId("560b904d38776103d63d326f"), "emp_id" : "A102", "name" : "Nikita", "Status" : "B", "salary" : 70000 }
+{ "_id" : ObjectId("560b8e9838776103d63d3266"), "emp_id" : "A123", "name" : "varsha", "Status" : "A", "salary" : 25000 }
+{ "_id" : ObjectId("560b8eee38776103d63d3267"), "emp_id" : "A123", "name" : "Anu", "Status" : "B", "salary" : 30000 }
+{ "_id" : ObjectId("560b8efa38776103d63d3268"), "emp_id" : "A123", "name" : "Hemlata", "Status" : "P", "salary" : 40000 }
+> 
+
+-------------------------------------------------------------------------
+
+14.Sort em according to em id in descending order
+> db.employee.aggregate([{$sort:{emp_id:-1}}])
+{ "_id" : ObjectId("560b8e9838776103d63d3266"), "emp_id" : "A123", "name" : "varsha", "Status" : "A", "salary" : 25000 }
+{ "_id" : ObjectId("560b8eee38776103d63d3267"), "emp_id" : "A123", "name" : "Anu", "Status" : "B", "salary" : 30000 }
+{ "_id" : ObjectId("560b8efa38776103d63d3268"), "emp_id" : "A123", "name" : "Hemlata", "Status" : "P", "salary" : 40000 }
+{ "_id" : ObjectId("560b8f3438776103d63d326c"), "emp_id" : "A102", "name" : "Sneha", "Status" : "B", "salary" : 55000 }
+{ "_id" : ObjectId("560b8f3f38776103d63d326d"), "emp_id" : "A102", "name" : "Mayuri", "Status" : "A", "salary" : 20000 }
+{ "_id" : ObjectId("560b8f4838776103d63d326e"), "emp_id" : "A102", "name" : "Prajkta", "Status" : "P", "salary" : 35000 }
+{ "_id" : ObjectId("560b904d38776103d63d326f"), "emp_id" : "A102", "name" : "Nikita", "Status" : "B", "salary" : 70000 }
+{ "_id" : ObjectId("560b8f0538776103d63d3269"), "emp_id" : "A100", "name" : "Radhika", "Status" : "A", "salary" : 50000 }
+{ "_id" : ObjectId("560b8f1438776103d63d326a"), "emp_id" : "A100", "name" : "Poonam", "Status" : "A", "salary" : 45000 }
+{ "_id" : ObjectId("560b8f2a38776103d63d326b"), "emp_id" : "A100", "name" : "Charu", "Status" : "P", "salary" : 60000 }
+> 
+
+----------------------------------------------------------------------------------------------------
+
+
+15.Sort em according to em id in ascending order and Find total amount under same id. 
+db.employee.aggregate([{$sort:{'emp_id':1}},{$group:{_id:'$emp_id','totalAmount':{$sum:'$salary'}}}])
+{ "_id" : "A123", "totalAmount" : 95000 }
+{ "_id" : "A102", "totalAmount" : 180000 }
+{ "_id" : "A100", "totalAmount" : 155000 }
+
+--------------------------------------------------------------
+16.Sort em according to em id in ascending order and Find maximum amount under same id. 
+> db.employee.aggregate([{$sort:{'emp_id':1}},{$group:{_id:'$emp_id','totalAmount':{$max:'$salary'}}}])
+{ "_id" : "A123", "totalAmount" : 40000 }
+{ "_id" : "A102", "totalAmount" : 70000 }
+{ "_id" : "A100", "totalAmount" : 60000 }
+
+-----------------------------------------------------------------
+17.Sort em according to em id in ascending order and Find minimum amount under same id. 
+ db.employee.aggregate([{$sort:{'emp_id':1}},{$group:{_id:'$emp_id','totalAmount':{$min:'$salary'}}}])
+{ "_id" : "A123", "totalAmount" : 25000 }
+{ "_id" : "A102", "totalAmount" : 20000 }
+{ "_id" : "A100", "totalAmount" : 45000 }
+> 
+
+---------------------------------------------------------------
+18.Sort em according to em id in ascending order and Find average amount under same id. 
+>  db.employee.aggregate([{$sort:{'emp_id':1}},{$group:{_id:'$emp_id','totalAmount':{$avg:'$salary'}}}])
+{ "_id" : "A123", "totalAmount" : 31666.666666666668 }
+{ "_id" : "A102", "totalAmount" : 45000 }
+{ "_id" : "A100", "totalAmount" : 51666.666666666664 }
+> 
+-----------------------------------------------------------------
+19.Sort em according to em id in ascending order and Find first amount under same id. 
+ db.employee.aggregate([{$sort:{'emp_id':1}},{$group:{_id:'$emp_id','totalAmount':{$first:'$salary'}}}])
+{ "_id" : "A123", "totalAmount" : 25000 }
+{ "_id" : "A102", "totalAmount" : 55000 }
+{ "_id" : "A100", "totalAmount" : 50000 }
+> 
+
+-----------------------------------------------------------------
+20.Sort em according to em id in ascending order and Find last amount under same id. 
+> db.employee.aggregate([{$sort:{'emp_id':1}},{$group:{_id:'$emp_id','totalAmount':{$last:'$salary'}}}])
+{ "_id" : "A123", "totalAmount" : 40000 }
+{ "_id" : "A102", "totalAmount" : 70000 }
+{ "_id" : "A100", "totalAmount" : 60000 }
+> 
+----------------------------------------------------------------
+21.Using skip operator find total amount of em.
+ db.employee.aggregate([{$skip:1},{$group:{_id:'$emp_id','totalAmount':{$sum:'$salary'}}}])
+{ "_id" : "A102", "totalAmount" : 180000 }
+{ "_id" : "A100", "totalAmount" : 155000 }
+{ "_id" : "A123", "totalAmount" : 70000 }
+> 
+
+
+----------------------------------------------------------------
+22.Using skip operator find minimum amount of em.
+
+> db.employee.aggregate([{$skip:1},{$group:{_id:'$emp_id','totalAmount':{$min:'$salary'}}}])
+{ "_id" : "A102", "totalAmount" : 20000 }
+{ "_id" : "A100", "totalAmount" : 45000 }
+{ "_id" : "A123", "totalAmount" : 30000 }
+> 
+------------------------------------------------------------------------------
+23.Using skip operator find maximum amount of em.
+> db.employee.aggregate([{$skip:1},{$group:{_id:'$emp_id','totalAmount':{$max:'$salary'}}}])
+{ "_id" : "A102", "totalAmount" : 70000 }
+{ "_id" : "A100", "totalAmount" : 60000 }
+{ "_id" : "A123", "totalAmount" : 40000 }
+> 
+
+----------------------------------------------------------------
+24.Using skip operator find first amount of em.
+
+> db.employee.aggregate([{$skip:1},{$group:{_id:'$emp_id','totalAmount':{$first:'$salary'}}}])
+{ "_id" : "A102", "totalAmount" : 55000 }
+{ "_id" : "A100", "totalAmount" : 50000 }
+{ "_id" : "A123", "totalAmount" : 30000 }
+> 
+
+----------------------------------------------------------------
+25.Using skip operator find last amount of em.
+> db.employee.aggregate([{$skip:1},{$group:{_id:'$emp_id','totalAmount':{$last:'$salary'}}}])
+{ "_id" : "A102", "totalAmount" : 70000 }
+{ "_id" : "A100", "totalAmount" : 60000 }
+{ "_id" : "A123", "totalAmount" : 40000 }
+> 
+-----------------------------------------------------------------
+26.Using limit operator find total amount of em.
+> db.employee.aggregate([{$limit:7},{$group:{_id:'$emp_id','totalAmount':{$sum:'$salary'}}}])
+{ "_id" : "A102", "totalAmount" : 55000 }
+{ "_id" : "A100", "totalAmount" : 155000 }
+{ "_id" : "A123", "totalAmount" : 95000 }
+> 
+
+--------------------------------------------------------------
+27.Using limit operator find maximum amount of em.
+> db.employee.aggregate([{$limit:7},{$group:{_id:'$emp_id','totalAmount':{$max:'$salary'}}}])
+{ "_id" : "A102", "totalAmount" : 55000 }
+{ "_id" : "A100", "totalAmount" : 60000 }
+{ "_id" : "A123", "totalAmount" : 40000 }
+> 
+
+---------------------------------------------------------------
+28.Using limit operator find minimum amount of em.
+
+> db.employee.aggregate([{$limit:7},{$group:{_id:'$emp_id','totalAmount':{$min:'$salary'}}}])
+{ "_id" : "A102", "totalAmount" : 55000 }
+{ "_id" : "A100", "totalAmount" : 45000 }
+{ "_id" : "A123", "totalAmount" : 25000 }
+> 
+
+-----------------------------------------------------------------
+29.Using limit operator find first amount of em.
+
+>  db.employee.aggregate([{$limit:2},{$group:{_id:'$emp_id','totalAmount':{$first:'$salary'}}}])
+{ "_id" : "A123", "totalAmount" : 25000 }
+> 
+-----------------------------------------------------------------
+30.Using limit operator find last amount of em.
+
+> db.employee.aggregate([{$limit:2},{$group:{_id:'$emp_id','totalAmount':{$last:'$salary'}}}])
+{ "_id" : "A123", "totalAmount" : 30000 }
+> 
+-----------------------------------------------------------------
+31.Create index.
+
+> db.customer.ensureIndex({'cust_id':1})
+>  db.customer.ensureIndex({'emp_id':1})
+{
+	"createdCollectionAutomatically" : true,
+	"numIndexesBefore" : 1,
+	"numIndexesAfter" : 2,
+	"ok" : 1
+}
+> 
+
+-------------------------------------------------------------------------
+32.Display Index
+>  db.employee.getIndexes()
+[
+	{
+		"v" : 1,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_",
+		"ns" : "db.employee"
+	},
+	{
+		"v" : 1,
+		"key" : {
+			"emp_id" : 1,
+			"salary" : -1
+		},
+		"name" : "emp_id_1_salary_-1",
+		"ns" : "db.employee"
+	}
+]
+> 
+
+-----------------------------------------------------------------
+33.Remove Index.
+>  db.employee.dropIndex({"emp_id":1})
+{
+	"nIndexesWas" : 2,
+	"ok" : 0,
+	"errmsg" : "can't find index with key:{ emp_id: 1.0 }"
+}
+> 
+
+-----------------------------------------------------------
+
+

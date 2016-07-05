@@ -1,0 +1,77 @@
+ASSIGNMENT NO:		       
+BATCH:		
+TITLE:
+	Map reduce operation with suitable example using MongoDB.
+
+
+linux@linux-OptiPlex-390:~$ mongo
+MongoDB shell version: 2.6.4
+connecting to: test
+
+1.Create database
+> use map
+switched to db map
+
+2.Create Collection
+> db.createCollection("books")
+{ "ok" : 1 }
+
+3.Insert documents
+>  db.books.insert({'name':'JAVA','pages':'100'})
+WriteResult({ "nInserted" : 1 })
+
+> db.books.insert({'name':'JSON','pages':'200'})
+WriteResult({ "nInserted" : 1 })
+
+> db.books.insert({'name':'XML','pages':'300'})
+WriteResult({ "nInserted" : 1 })
+
+> db.books.insert({'name':'WEB services','pages':'400'})
+WriteResult({ "nInserted" : 1 })
+
+> db.books.insert({'name':'C programming','pages':'150'})
+WriteResult({ "nInserted" : 1 })
+
+4.Display documents
+>  db.books.find().pretty()
+{
+	"_id" : ObjectId("542275f380e8033b34c87673"),
+	"name" : "JAVA",
+	"pages" : "100"
+}
+{
+	"_id" : ObjectId("542275fc80e8033b34c87674"),
+	"name" : "JSON",
+	"pages" : "200"
+}
+{
+	"_id" : ObjectId("5422760380e8033b34c87675"),
+	"name" : "XML",
+	"pages" : "300"
+}
+{
+	"_id" : ObjectId("5422760b80e8033b34c87676"),
+	"name" : "WEB services",
+	"pages" : "400"
+}
+{
+	"_id" : ObjectId("5422761580e8033b34c87677"),
+	"name" : "C programming",
+	"pages" : "150"
+}
+
+5.Write map function on books
+> var map=function(){ var category; if(this.pages>=250) category='Big books'; else category='Small books'; emit(category,{name:this.name});};
+
+6.Write reduce function on books
+>  var reduce =function(key,values){ var sum=0; values.forEach(function(doc) { sum=sum+1; }); return{books: sum}; };
+
+7.Write mapreduce function on books
+>  var count = db.books.mapReduce(map, reduce, {out: "book_results"});
+
+8.Display the combined result
+> db[count.result].find()
+{ "_id" : "Big books", "value" : { "books" : 2 } }
+{ "_id" : "Small books", "value" : { "books" : 3 } }
+> 
+

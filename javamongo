@@ -1,0 +1,230 @@
+/*Assignment no:
+Title:	Implement database with suitable example using mongodb and implement all basic operations command using two tier architecture.
+Batch: 
+---------------------------------------------------------------------*/
+package k;
+import com.mongodb.*;
+import java.util.Scanner;
+public class h {
+
+	public static void main(String[] args) {
+		
+    try
+    {
+    	 MongoClient mongoClient = new MongoClient( "localhost" ,27017 );
+         // Now connect to your databases
+         DB db = mongoClient.getDB( "student" );
+		 System.out.println("Connect to database successfully");
+		
+         
+         DBCollection col = db.getCollection("stud_info");
+         System.out.println("Collection stud_info selected successfully");
+         
+         Scanner sc = new Scanner(System.in);
+         int ch=0;
+          do
+          {
+        		System.out.println("1.Insert");
+        	   	System.out.println("2.Update");
+        	   	System.out.println("3.delete");
+        	   	System.out.println("4.display");
+
+        	   	System.out.println("enter u r choice");
+        	    	
+        	    ch=sc.nextInt();
+             
+        	    switch(ch)
+        	    {
+        	    case 1:
+        	    	 System.out.println("Enter roll no:");
+        	    	 int roll_no=sc.nextInt();
+        	    	 System.out.println("Enter name:");
+        	    	 String str1=sc.next();
+        	    	 System.out.println("Enter age:");
+        	    	 int age=sc.nextInt();
+        	    	 System.out.println("Enter per:");
+        	    	 float per=sc.nextInt();
+        	    	 System.out.println("Enter address:");
+        	    	 String add=sc.next();
+        	    	 BasicDBObject Document2 = new BasicDBObject( "roll no",roll_no).append("name",str1).append("age",age).append("per",per).append("add",add);
+        	    	 col.insert(Document2); 
+        	    	 break;
+        	    	 
+        	    case 2:
+        	    	   System.out.println("Enter roll no to be updated");
+        	    	   int roll_no1=sc.nextInt();
+        	    	   System.out.println("Enter new name:");
+          	    	   String str2=sc.next();
+          	    	   
+          	    	  System.out.println("Enter new age:");
+        	    	  int age1=sc.nextInt();
+        	    	  System.out.println("Enter new per:");
+        	    	  float per1=sc.nextInt();
+        	    	  System.out.println("Enter new address:");
+        	    	  String add1=sc.next();
+          	    	 
+          	         BasicDBObject Document = new BasicDBObject( "roll no",roll_no1);
+          	    	 BasicDBObject newDocument = new BasicDBObject();
+          	    	 newDocument.put("roll no",roll_no1);
+          	    	 newDocument.append("name",str2);
+          	    	 newDocument.append("age",age1);
+          	    	 newDocument.append("per",per1);
+          	    	 newDocument.append("add",add1);
+          	    	 
+          	    	 DBObject searchQuery=null;
+          	    	 DBCursor cursor1=col.find(Document);
+          	    	 while(cursor1.hasNext())
+          	    	   {
+          	    		 searchQuery=cursor1.next();
+          	    		 col.update(searchQuery,newDocument);
+          	    	   }
+          	    	    break;
+          	    	    
+        	    case 3:
+        	    	  System.out.println("Enter roll no to be deleted");
+       	    	       int roll_no2=sc.nextInt();
+       	    	    BasicDBObject Document1 = new BasicDBObject( "roll no",roll_no2);
+       	    	    col.remove(Document1);
+       	    	    break;
+       	    	    
+        	    case 4:
+        	    	
+        	     DBCursor cursor=col.find();
+        	     int i=1;
+        	     while(cursor.hasNext())
+        	      {
+        	    	 System.out.println(cursor.next());
+        	    	 i++;
+        	    	 
+        	      }
+        	      break;
+        	    	
+        	     
+        	    	    
+                  	    }
+          }while(ch<=4);
+          
+         
+    }
+    
+    catch(Exception e)
+      {
+    	
+       }
+
+	}
+
+}
+/*
+-----------------------------------------------------------------------
+Output:
+
+Connect to database successfully
+Collection stud_info selected successfully
+1.Insert
+2.Update
+3.delete
+4.display
+enter u r choice
+1
+Enter roll no:
+59
+Enter name:
+priyanka
+Enter age:
+20
+Enter per:
+60
+Enter address:
+nashik
+1.Insert
+2.Update
+3.delete
+4.display
+enter u r choice
+1
+Enter roll no:
+67
+Enter name:
+jineesha
+Enter age:
+20
+Enter per:
+60
+Enter address:
+nashik
+1.Insert
+2.Update
+3.delete
+4.display
+enter u r choice
+1
+Enter roll no:
+40
+Enter name:
+poonam
+Enter age:
+20
+Enter per:
+60
+Enter address:
+nashik
+1.Insert
+2.Update
+3.delete
+4.display
+enter u r choice
+4
+{ "_id" : { "$oid" : "560ba638e4b0996e3905a5b1"} , "database" : "student" , "table" : "stud_info" , "age" : 20 , "addrs" : "nashik" , "status" : "A" , "percentage" : 70}
+{ "_id" : { "$oid" : "560bbcbee4b06b8e2dcb52d8"} , "roll no" : 59 , "name" : "priyanka" , "age" : 20 , "per" : 60.0 , "add" : "nashik"}
+{ "_id" : { "$oid" : "560bbcdae4b06b8e2dcb52d9"} , "roll no" : 67 , "name" : "jineesha" , "age" : 20 , "per" : 60.0 , "add" : "nashik"}
+{ "_id" : { "$oid" : "560bbcf5e4b06b8e2dcb52da"} , "roll no" : 40 , "name" : "poonam" , "age" : 20 , "per" : 60.0 , "add" : "nashik"}
+1.Insert
+2.Update
+3.delete
+4.display
+enter u r choice
+2
+Enter roll no to be updated
+67
+Enter new name:
+jineesha
+Enter new age:
+19
+Enter new per:
+50
+Enter new address:
+nashik
+1.Insert
+2.Update
+3.delete
+4.display
+enter u r choice
+4
+{ "_id" : { "$oid" : "560ba638e4b0996e3905a5b1"} , "database" : "student" , "table" : "stud_info" , "age" : 20 , "addrs" : "nashik" , "status" : "A" , "percentage" : 70}
+{ "_id" : { "$oid" : "560bbcbee4b06b8e2dcb52d8"} , "roll no" : 59 , "name" : "priyanka" , "age" : 20 , "per" : 60.0 , "add" : "nashik"}
+{ "_id" : { "$oid" : "560bbcdae4b06b8e2dcb52d9"} , "roll no" : 67 , "name" : "jineesha" , "age" : 19 , "per" : 50.0 , "add" : "nashik"}
+{ "_id" : { "$oid" : "560bbcf5e4b06b8e2dcb52da"} , "roll no" : 40 , "name" : "poonam" , "age" : 20 , "per" : 60.0 , "add" : "nashik"}
+1.Insert
+2.Update
+3.delete
+4.display
+enter u r choice
+3
+Enter roll no to be deleted
+40
+1.Insert
+2.Update
+3.delete
+4.display
+enter u r choice
+4
+{ "_id" : { "$oid" : "560ba638e4b0996e3905a5b1"} , "database" : "student" , "table" : "stud_info" , "age" : 20 , "addrs" : "nashik" , "status" : "A" , "percentage" : 70}
+{ "_id" : { "$oid" : "560bbcbee4b06b8e2dcb52d8"} , "roll no" : 59 , "name" : "priyanka" , "age" : 20 , "per" : 60.0 , "add" : "nashik"}
+{ "_id" : { "$oid" : "560bbcdae4b06b8e2dcb52d9"} , "roll no" : 67 , "name" : "jineesha" , "age" : 19 , "per" : 50.0 , "add" : "nashik"}
+1.Insert
+2.Update
+3.delete
+4.display
+enter u r choice*/
+
